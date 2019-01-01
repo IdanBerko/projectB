@@ -1,6 +1,6 @@
 use base
 
-num_chan_bn = 64
+num_chan_bn = 64    # Number of output channels from the encoder (before sparse representation and quantization)
 H_target = 1.0  # == 64/C * bpp
 
 

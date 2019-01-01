@@ -1,4 +1,4 @@
-num_chan_bn = 3*8*8
+num_chan_bn = 3*8*8    # Number of output channels from the encoder (before sparse representation and quantization)
 regularization_factor = 1e-2
 constrain normalization :: OFF, FIXED
 normalization = FIXED
