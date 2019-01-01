@@ -21,15 +21,23 @@ def get_dataset(ds):
     - everything else is assumed to be a glob matching some image files
     """
     try:
-        return RecordsDataset.get_dataset(ds)
+        image_from_glob = PathsDataset.from_img_glob(ds)
+        return image_from_glob
     except ValueError as e:
         print(e)
     try:
-        return PathsDataset.from_paths_pickle_file(ds)
+        recs = RecordsDataset.get_dataset(ds)
+        return recs
     except ValueError as e:
         print(e)
     try:
-        return PathsDataset.from_img_glob(ds)
+        pickles = PathsDataset.from_paths_pickle_file(ds)
+        return pickles
+    except ValueError as e:
+        print(e)
+    try:
+        image_from_glob = PathsDataset.from_img_glob(ds)
+        return image_from_glob
     except ValueError as e:
         print(e)
     raise ValueError('Invalid dataset: {}'.format(ds))
