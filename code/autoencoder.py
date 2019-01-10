@@ -265,6 +265,7 @@ class _CVPR(_Network):
             net = slim.conv2d_transpose(net, 3, [fb, fb], stride=2, scope='h13', activation_fn=None)
             net = self._denormalize(net)
             net = self._clip_to_image_range(net)
+            net = sparse_representation(net, 0)
             return net
 
 
@@ -286,3 +287,9 @@ def residual_block(x, num_outputs, num_conv2d, **kwargs):
 
         return x + residual_input
 
+@slim.add_arg_scope
+def sparse_representation(x, L1_coeff):
+    # input = x
+
+    # alpha_tmp = emb.t() @ x_reshaped
+    return x
