@@ -17,6 +17,7 @@ TensorFlow implementation of **Conditional Probability Models for Deep Image Com
 - TensorFlow (tested with tensorflow-gpu version 1.4.1)
 - Python packages as specified by requirements.txt (`pip install -r requirements.txt`)
 - A CUDA-compatible GPU
+- CUDA 8.0 and cuDNN 6.0
 
 ## Inference
 
