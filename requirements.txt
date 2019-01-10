@@ -14,4 +14,3 @@ httplib2
 apiclient
 google-api-python-client
 oauth2client
-# CUDA 8.0 and cuDNN 6.0
