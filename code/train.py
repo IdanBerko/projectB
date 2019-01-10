@@ -66,6 +66,10 @@ def train(autoencoder_config_path, probclass_config_path,
     pc_config, pc_config_rel_path = config_parser.parse(probclass_config_path)
     print_configs(('ae_config', ae_config), ('pc_config', pc_config))
 
+    '''self.register_buffer('weight', torch.rand(embeddings_dim, num_embeddings))
+    tf.initializers.orthogonal_(self.weight)
+    self.weight = F.normalize(self.weight, 2, 0)'''
+
     continue_in_ckpt_dir = restore_manager and restore_manager.continue_in_ckpt_dir
     if continue_in_ckpt_dir:
         logdir = restore_manager.log_dir

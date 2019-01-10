@@ -265,7 +265,7 @@ class _CVPR(_Network):
             net = slim.conv2d_transpose(net, 3, [fb, fb], stride=2, scope='h13', activation_fn=None)
             net = self._denormalize(net)
             net = self._clip_to_image_range(net)
-            net = sparse_representation(net, 0)
+            net = sparse_representation(net, L1_coeff=0)  # TODO: change L1_coeff
             return net
 
 
