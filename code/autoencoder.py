@@ -8,7 +8,7 @@ from contextlib import contextmanager
 
 
 import quantizer
-
+import sparse_dictionary
 
 # returned by _Network.encode
 # z is the bottleneck before quantization
@@ -240,6 +240,14 @@ class _CVPR(_Network):
                 net = self._mask_with_heatmap(net, heatmap)
             else:
                 heatmap = None
+
+
+            l1_coeff = 0
+            num_embeddings = 16
+            embeddings_dim = 64
+            net = sparse_dictionary.SparseDictionary(net, num_embeddings, embeddings_dim, l1_coeff)  # TODO: change L1_coeff
+
+
             qout = self._quantize(net)
             return EncoderOutput(qout.qbar, qout.qhard, qout.symbols, net, heatmap)
 
@@ -265,7 +273,6 @@ class _CVPR(_Network):
             net = slim.conv2d_transpose(net, 3, [fb, fb], stride=2, scope='h13', activation_fn=None)
             net = self._denormalize(net)
             net = self._clip_to_image_range(net)
-            net = sparse_representation(net, L1_coeff=0)  # TODO: change L1_coeff
             return net
 
 
@@ -286,10 +293,8 @@ def residual_block(x, num_outputs, num_conv2d, **kwargs):
             x = slim.conv2d(x, **kwargs)
 
         return x + residual_input
-
+'''
 @slim.add_arg_scope
 def sparse_representation(x, L1_coeff):
-    # input = x
-
-    # alpha_tmp = emb.t() @ x_reshaped
-    return x
+    return sparse_dictionary(x, L1_coeff)
+'''

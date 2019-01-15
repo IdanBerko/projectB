@@ -103,6 +103,7 @@ def train(autoencoder_config_path, probclass_config_path,
     x_train = ip_train.get_batch()
 
     enc_out_train = ae.encode(x_train, is_training=True)  # qbar is masked by the heatmap
+    # TODO: for seperation of encoder and decoder, call sparse representation here.
     x_out_train = ae.decode(enc_out_train.qbar, is_training=True)
     # stop_gradient is beneficial for training. it prevents multiple gradients flowing into the heatmap.
     pc_in = tf.stop_gradient(enc_out_train.qbar)
