@@ -244,8 +244,8 @@ class _CVPR(_Network):
 
             l1_coeff = 0
             num_embeddings = 16
-            embeddings_dim = 64
-            net = sparse_dictionary.SparseDictionary(net, num_embeddings, embeddings_dim, l1_coeff)  # TODO: change L1_coeff
+            embeddings_dim = 32 # TODO: the network cannot take other argument at the moment.
+            net = sparse_dictionary.SparseDictionary(num_embeddings, embeddings_dim, l1_coeff)(net)  # TODO: change L1_coeff
 
 
             qout = self._quantize(net)
