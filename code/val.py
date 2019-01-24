@@ -25,11 +25,13 @@ from collections import namedtuple
 from val_files import ValidationDirs, MeasuresWriter
 
 import bpp_helpers
+from keras.backend import manual_variable_initialization
 
 
 _VALIDATION_INFO_STR = """
 - VALIDATION -------------------------------------------------------------------"""
-
+# added recenetly
+manual_variable_initialization(True)
 
 _CKPT_ITR_INFO_STR = """- Validating ckpt {} ----------"""
 

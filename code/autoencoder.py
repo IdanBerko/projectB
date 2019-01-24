@@ -32,7 +32,7 @@ def get_network_cls(config):
 
 class _Network(object):
     def __init__(self, config, quantize=True):
-        self.config = config
+        self.config = config # TODO: this config includes architecture of the network. Our sparse dictionary need to be set as well.
         self.quantize = quantize
 
         self.reuse_enc = False
@@ -201,6 +201,7 @@ class _Network(object):
 
     @staticmethod
     def _get_trainable_vars_assert_non_empty(scope):
+        # trainable_vars = tf.get_variable_scope(scope)
         trainable_vars = tf.trainable_variables(scope)
         assert len(trainable_vars) > 0, 'No trainable variables found in scope {}. All: {}'.format(
             scope, tf.trainable_variables())
@@ -242,9 +243,9 @@ class _CVPR(_Network):
                 heatmap = None
 
 
-            l1_coeff = 0
+            l1_coeff = 2
             num_embeddings = 16
-            embeddings_dim = 32 # TODO: the network cannot take other argument at the moment.
+            embeddings_dim = 32 # TODO: the network cannot take other argument at the moment. = num_chan_bn
             net = sparse_dictionary.SparseDictionary(num_embeddings, embeddings_dim, l1_coeff)(net)  # TODO: change L1_coeff
 
 

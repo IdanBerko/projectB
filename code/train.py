@@ -3,6 +3,9 @@ import tensorflow as tf
 from fjcommon import tf_helpers
 from fjcommon import config_parser
 from fjcommon import functools_ext
+from tensorflow import keras
+from keras.backend import manual_variable_initialization
+
 
 import time
 import os
@@ -26,6 +29,8 @@ import sheets_logger
 import numpy as np
 from codec_distance import CodecDistance, CodecDistanceReadException
 
+# added recenetly
+manual_variable_initialization(True)
 
 # Enable TF logging output
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -239,6 +244,7 @@ def train_loop(
 
     if is_restored:
         itr = sess.run(global_step)
+        #print(sess.run())
         train_logger.log().to_tensorboard(fw, itr).to_console(itr, append='Restored')
         test_logger.log().to_tensorboard(fw, itr).to_console(itr)
 

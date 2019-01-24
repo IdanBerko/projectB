@@ -2,7 +2,7 @@ num_chan_bn = 3*8*8    # Number of output channels from the encoder (before spar
 regularization_factor = 1e-2
 constrain normalization :: OFF, FIXED
 normalization = FIXED
-heatmap = True
+heatmap = False
 
 # Training Parameters
 beta = 250
